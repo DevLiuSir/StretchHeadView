@@ -15,14 +15,15 @@ private let headerviewH: CGFloat = 300
 /// 屏幕的宽度
 private let screenW: CGFloat = UIScreen.main.bounds.width
 
-/// 深绿色
-private let darkGreen = UIColor(hue:0.40, saturation:0.78, brightness:0.68, alpha:1.00)
-
 /// 导航栏的高度
 private let navigationH: CGFloat = 44
 
 /// 状态栏的高度
 private let statusH: CGFloat = 20
+
+
+/// 深绿色
+private let darkGreen = UIColor(hue:0.40, saturation:0.78, brightness:0.68, alpha:1.00)
 
 /// 重用标识符
 private let CellID = "CellID"
@@ -41,8 +42,6 @@ class ViewController: UIViewController {
     
     /// 分割线
     var lineView: UIView!
-
-    
 
     // MARK: - 系统回调函数
     override func viewDidLoad() {
@@ -70,7 +69,7 @@ class ViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: - 配置TableView
+    /// 配置TableView
     private func configTableView() {
         
         // 设置表格顶部间距, 使得HaderView不被遮挡
@@ -79,7 +78,6 @@ class ViewController: UIViewController {
         // 设置指示器的间距, 等于表格顶部的间距
         tableView.scrollIndicatorInsets = tableView.contentInset
         
-        // 设置数据源\代理协议
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -88,7 +86,7 @@ class ViewController: UIViewController {
         
         
     }
-    // MARK: - 配置HaderView
+    /// 配置HaderView
     private func configHeaderView() {
         
         Headerview = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screenW, height: headerviewH))
@@ -137,7 +135,6 @@ class ViewController: UIViewController {
 // MARK: - 遵守 UITableViewDataSource 协议
 extension ViewController: UITableViewDataSource {
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
@@ -165,7 +162,7 @@ extension ViewController: UITableViewDelegate {
          */
         // 偏移量: -200 + 顶部边距: 200, 等于0
         let offsetY = scrollView.contentOffset.y + scrollView.contentInset.top
-//        print(offsetY)
+        print(offsetY)
 
 /*
         // 放大图像
@@ -207,7 +204,8 @@ extension ViewController: UITableViewDelegate {
             Headerview.frame.origin.y = -offsetY
             
             /// HeaderView最小的Y值
-            let headerViewMinY = headerviewH - navigationH - statusH
+            let headerViewMinY = headerviewH - navigationH - statusH  // 显示导航栏
+            //let headerViewMinY = headerviewH - statusH              // 显示状态栏
             
             // min函数: 取最小值
             Headerview.frame.origin.y = -min(headerViewMinY, offsetY)
