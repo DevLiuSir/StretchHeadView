@@ -10,5 +10,9 @@
 
 
 
-### 效果图: 
+### 效果1: 
 ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/StretchHeadView/preview.gif)
+
+
+### 效果2:
+![](https://github.com/ChinaHackers/StretchHeadView/raw/master/StretchHeadView/preview2.gif)
