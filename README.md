@@ -1,7 +1,9 @@
-## TableView头部拉伸\放大效果
-![language](https://img.shields.io/badge/language-swift-orange.svg)
-[![Swift  4.0](https://img.shields.io/badge/swift-4.0+-blue.svg?style=flat)](https://developer.apple.com/swift/)
-![xcode version](https://img.shields.io/badge/xcode-9+-brightgreen.svg)
+<p align="center"> <b>TableView head stretch\ amplification effect. </b></p> 
+
+
+![Languages](https://img.shields.io/badge/language-swift%20|%20objc-orange.svg?style=flat)
+[![Swift  4.0](https://img.shields.io/badge/swift-4.0.3+-blue.svg?style=flat)](https://developer.apple.com/swift/)
+![xcode version](https://img.shields.io/badge/xcode-9+-yellow.svg)
 ![build ](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg)
 ![platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 ![GitHub starts](https://img.shields.io/github/stars/ChinaHackers/StretchHeadView.svg?style=social&label=Stars)
@@ -15,7 +17,7 @@
 - Swift 4.0.3+
 
 ## Screencast from our Demo
-| ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/StretchHeadView/preview.gif) | ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/StretchHeadView/preview2.gif) |
+| ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/Screenshot/preview.gif) | ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/Screenshot/preview2.gif) |
 | :------------: | :------------: 
 | `effect 1` |  `effect 2` |
 
