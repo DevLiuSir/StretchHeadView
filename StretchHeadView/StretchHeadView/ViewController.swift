@@ -19,7 +19,7 @@ private let screenW: CGFloat = UIScreen.main.bounds.width
 private let navigationH: CGFloat = 44
 
 /// 状态栏的高度
-private let statusH: CGFloat = 20
+private let statusH: CGFloat = UIApplication.shared.statusBarFrame.size.height
 
 /// 深绿色
 private let darkGreen = UIColor(hue:0.40, saturation:0.78, brightness:0.68, alpha:1.00)
