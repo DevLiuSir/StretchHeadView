@@ -14,7 +14,7 @@
 
 - iOS 11.2
 - Xcode 9.2
-- Swift 4.0.3+
+
 
 ## Screencast from our Demo
 | ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/Screenshot/preview.gif) | ![](https://github.com/ChinaHackers/StretchHeadView/raw/master/Screenshot/preview2.gif) |
