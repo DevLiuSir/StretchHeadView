@@ -8,22 +8,10 @@
 
 import UIKit
 
-
 /// 头部视图的高度
 private let headerviewH: CGFloat = 300
-
-/// 屏幕的宽度
-private let screenW: CGFloat = UIScreen.main.bounds.width
-
-/// 导航栏的高度
-private let navigationH: CGFloat = 44
-
-/// 状态栏的高度
-private let statusH: CGFloat = UIApplication.shared.statusBarFrame.size.height
-
 /// 深绿色
 private let darkGreen = UIColor(hue:0.40, saturation:0.78, brightness:0.68, alpha:1.00)
-
 /// 重用标识符
 private let CellID = "CellID"
 
@@ -34,13 +22,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     /// 头部视图
-    var Headerview: UIView!
+    private lazy var Headerview = UIView()
     
     /// 头部视图图片
-    var HeaderImage: UIImageView!
+    private lazy var HeaderImage = UIImageView()
     
     /// 分割线
-    var lineView: UIView!
+    private lazy var lineView = UIView()
 
     // MARK: - 系统回调函数
     override func viewDidLoad() {
@@ -53,13 +41,8 @@ class ViewController: UIViewController {
     // MARK: - 视图即将出现时, 调用
     override func viewWillAppear(_ animated: Bool) {
         
-        // 隐藏导航栏, 带动画
+        // 隐藏导航栏,带动画
         navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        // iOS7以后, 导航控制器中ScrollView\tableView顶部会添加 64 的额外高度
-        // 取消自动调整滚动视图间距
-        automaticallyAdjustsScrollViewInsets = false
-        
     }
     
     // MARK: - 设置状态栏风格
@@ -67,6 +50,10 @@ class ViewController: UIViewController {
         return .lightContent
     }
     
+}
+
+// MARK: - Custom Method
+extension ViewController {
     
     /// 配置TableView
     private func configTableView() {
@@ -75,35 +62,33 @@ class ViewController: UIViewController {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         } else {
-            // Fallback on earlier versions
+            // iOS7以后, 导航控制器中ScrollView\tableView顶部会添加 64 的额外高度
+            // 取消自动调整滚动视图间距
+            automaticallyAdjustsScrollViewInsets = false
         }
         
         // 设置表格顶部间距, 使得HaderView不被遮挡
         tableView.contentInset = UIEdgeInsets(top: headerviewH, left: 0, bottom: 0, right: 0)
-        
         // 设置指示器的间距, 等于表格顶部的间距
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.dataSource = self
         tableView.delegate = self
-        
-        // 注册cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellID)
     }
+    
     /// 配置HaderView
     private func configHeaderView() {
         
         Headerview = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screenW, height: headerviewH))
         Headerview.backgroundColor = darkGreen
-        
-        //HeaderImage = UIImageView(frame: CGRect(x: 0, y: 0, width: screenW, height: headerviewH))
         HeaderImage = UIImageView(frame: Headerview.bounds)
         
         /*
-         UIImageView的contentMode 属性 :
-         UIViewContentModeScaleToFill     会导致图片变形。根据视图的比例去拉伸图片内容。
-         UIViewContentModeScaleAspectFit  保证图片比例不变，而且全部显示在ImageView中，这意味着ImageView会有部分空白。
-         UIViewContentModeScaleAspectFill 保证图片比例不变，但是会填充整个ImageView，可能只有部分图片显示出来。
-         UIViewContentModeCenter          保持图片原比例在视图中间显示图片内容
+         UIImageView的contentMode 属性
+         UIViewContentModeScaleToFill       : 会导致图片变形。根据视图的比例去拉伸图片内容。
+         UIViewContentModeScaleAspectFit    : 保证图片比例不变，而且全部显示在ImageView中，这意味着ImageView会有部分空白。
+         UIViewContentModeScaleAspectFill   : 保证图片比例不变，但是会填充整个ImageView，可能只有部分图片显示出来。
+         UIViewContentModeCenter            : 保持图片原比例在视图中间显示图片内容
          
          */
         
@@ -116,13 +101,11 @@ class ViewController: UIViewController {
         // 设置图像裁切
         HeaderImage.clipsToBounds = true
         
-        
-        // 添加分割线: 1个像素点
+        /* 添加分割线: 1个像素点 */
         // 1个像素点 / 分辨率
         let lineH = 1 / UIScreen.main.scale
-        
         lineView = UIView(frame: CGRect(x: 0, y: headerviewH - lineH, width: screenW, height: lineH))
-        lineView.backgroundColor = UIColor.lightGray
+        lineView.backgroundColor = .lightGray
         
         // 添加控件
         Headerview.addSubview(lineView)
@@ -130,7 +113,6 @@ class ViewController: UIViewController {
         view.addSubview(Headerview)
     }
 }
-
 
 // MARK: - 遵守 UITableViewDataSource 协议
 extension ViewController: UITableViewDataSource {
@@ -144,8 +126,6 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
 }
-
-
 
 // MARK: - 遵守 UITableViewDelegate 协议
 extension ViewController: UITableViewDelegate {
@@ -167,8 +147,8 @@ extension ViewController: UITableViewDelegate {
             Headerview.frame.origin.y = -offsetY
             
             /// HeaderView最小的Y值
-            let headerViewMinY = headerviewH - navigationH - statusH  // 显示导航栏
-            //let headerViewMinY = headerviewH - statusH              // 显示状态栏
+            let headerViewMinY = headerviewH - navigationH          // 显示导航栏
+            //let headerViewMinY = headerviewH - statusH            // 显示状态栏
             
             // min函数: 取最小值
             Headerview.frame.origin.y = -min(headerViewMinY, offsetY)
